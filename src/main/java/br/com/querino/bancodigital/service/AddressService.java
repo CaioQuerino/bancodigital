@@ -2,7 +2,7 @@ package br.com.querino.bancodigital.service;
 
 import org.springframework.stereotype.Service;
 
-import br.com.querino.bancodigital.dto.AddressDTO;
+import br.com.querino.bancodigital.dto.user.AddressDTO;
 import br.com.querino.bancodigital.entity.AddressEntity;
 import lombok.AllArgsConstructor;
 

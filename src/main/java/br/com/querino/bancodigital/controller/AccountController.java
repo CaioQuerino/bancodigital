@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.querino.bancodigital.dto.CreateUserDTO;
 import br.com.querino.bancodigital.dto.account.AccountrResponseDTO;
 import br.com.querino.bancodigital.dto.account.CreateAccountDTO;
 import br.com.querino.bancodigital.dto.account.CreateUserAccountDTO;
 import br.com.querino.bancodigital.dto.account.ListAccountDTO;
+import br.com.querino.bancodigital.dto.user.CreateUserDTO;
 import br.com.querino.bancodigital.entity.AccountEntity;
 import br.com.querino.bancodigital.entity.UserEntity;
 import br.com.querino.bancodigital.enums.UserRole;

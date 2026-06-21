@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.querino.bancodigital.dto.account.AccountrResponseDTO;
 import br.com.querino.bancodigital.dto.account.CreateAccountDTO;
 import br.com.querino.bancodigital.dto.account.ListAccountDTO;
-import br.com.querino.bancodigital.dto.CreateUserDTO;
+import br.com.querino.bancodigital.dto.user.CreateUserDTO;
 import br.com.querino.bancodigital.entity.AccountEntity;
 import br.com.querino.bancodigital.entity.UserEntity;
 import br.com.querino.bancodigital.repository.AccountRepository;

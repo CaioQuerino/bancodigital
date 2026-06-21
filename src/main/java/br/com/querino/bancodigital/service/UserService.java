@@ -7,9 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.querino.bancodigital.util.DataMaskUtil;
-import br.com.querino.bancodigital.dto.CreateUserDTO;
-import br.com.querino.bancodigital.dto.ListUserDTO;
-import br.com.querino.bancodigital.dto.UserResponseDTO;
+import br.com.querino.bancodigital.dto.user.CreateUserDTO;
+import br.com.querino.bancodigital.dto.user.ListUserDTO;
+import br.com.querino.bancodigital.dto.user.UserResponseDTO;
 import br.com.querino.bancodigital.entity.UserEntity;
 import br.com.querino.bancodigital.repository.UserRepository;
 import br.com.querino.bancodigital.enums.UserRole;

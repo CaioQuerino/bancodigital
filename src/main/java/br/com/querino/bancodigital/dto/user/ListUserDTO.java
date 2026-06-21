@@ -1,4 +1,4 @@
-package br.com.querino.bancodigital.dto;
+package br.com.querino.bancodigital.dto.user;
 
 import br.com.querino.bancodigital.enums.Occupation;
 import br.com.querino.bancodigital.util.DataMaskUtil;
