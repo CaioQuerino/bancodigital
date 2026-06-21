@@ -1,6 +1,7 @@
-package br.com.querino.bancodigital.dto;
+package br.com.querino.bancodigital.dto.user;
 
 import br.com.querino.bancodigital.enums.Occupation;
+import br.com.querino.bancodigital.enums.UserRole;
 import br.com.querino.bancodigital.util.DataMaskUtil;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -62,7 +63,7 @@ public class CreateUserDTO {
                     ", cpf='" + DataMaskUtil.maskCpf(cpf) + '\'' +
                     ", age='" + age + '\'' +
                     ", email='" + DataMaskUtil.maskEmail(email) + '\'' +
-                    ", phone='" + phone + '\'' +
+                    ", phone='" + DataMaskUtil.maskPhone(phone) + '\'' +
                     ", occupation=" + occupation +
                     ", income=" + income +
                     ", address=" + address +

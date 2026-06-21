@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.querino.bancodigital.dto.CreateUserDTO;
-import br.com.querino.bancodigital.dto.ListUserDTO;
-import br.com.querino.bancodigital.dto.UserResponseDTO;
+import br.com.querino.bancodigital.dto.user.CreateUserDTO;
+import br.com.querino.bancodigital.dto.user.ListUserDTO;
+import br.com.querino.bancodigital.dto.user.UserResponseDTO;
 import br.com.querino.bancodigital.service.UserService;
 import br.com.querino.bancodigital.util.ApiResponse;
 import jakarta.validation.Valid;
