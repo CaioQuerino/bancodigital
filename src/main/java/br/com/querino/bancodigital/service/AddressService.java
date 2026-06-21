@@ -10,6 +10,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AddressService {
     public AddressEntity convertDtoToEntity(AddressDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return AddressEntity.builder()
             .cep(dto.getCep())
             .logradouro(dto.getLogradouro())
@@ -21,6 +25,10 @@ public class AddressService {
     }
 
     public AddressDTO convertEntityToDto(AddressEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+
         return AddressDTO.builder()
             .cep(entity.getCep())
             .logradouro(entity.getLogradouro())

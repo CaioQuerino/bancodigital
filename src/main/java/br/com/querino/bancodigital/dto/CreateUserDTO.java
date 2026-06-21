@@ -35,6 +35,8 @@ public class CreateUserDTO {
     @Email(message = "Email deve ser válido")
     private String email;
 
+    private UserRole userRole;
+
     @NotNull(message = "Senha é obrigatória")
     private String password;
 
@@ -56,6 +58,7 @@ public class CreateUserDTO {
          return "CreateUserDTO{" +
                     "firstName='" + firstName + '\'' +
                     ", lastName='" + lastName + '\'' +
+                    ", userRole='" + userRole + '\'' +
                     ", cpf='" + DataMaskUtil.maskCpf(cpf) + '\'' +
                     ", age='" + age + '\'' +
                     ", email='" + DataMaskUtil.maskEmail(email) + '\'' +
