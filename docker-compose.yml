@@ -5,10 +5,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "${APP_PORT}:${APP_PORT}"
+    env_file:
+      - .env
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://${DB_HOST}:5432/${POSTGRES_DB}
       - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
       - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRATION_MS=${JWT_EXPIRATION_MS}
     depends_on:
       db:
         condition: service_healthy
