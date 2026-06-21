@@ -63,7 +63,7 @@ public class CreateUserDTO {
                     ", cpf='" + DataMaskUtil.maskCpf(cpf) + '\'' +
                     ", age='" + age + '\'' +
                     ", email='" + DataMaskUtil.maskEmail(email) + '\'' +
-                    ", phone='" + phone + '\'' +
+                    ", phone='" + DataMaskUtil.maskPhone(phone) + '\'' +
                     ", occupation=" + occupation +
                     ", income=" + income +
                     ", address=" + address +

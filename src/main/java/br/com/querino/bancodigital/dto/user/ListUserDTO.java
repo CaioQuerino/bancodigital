@@ -20,13 +20,21 @@ public class ListUserDTO {
     private Double income;
     private AddressDTO address;
 
+    public String getPhone() {
+        return DataMaskUtil.maskPhone(phone);
+    }
+
+    public String getEmail() {
+        return DataMaskUtil.maskEmail(email);
+    }
+
     @Override
     public String toString() {
          return "ListUserDTO{" +
                     "firstName='" + firstName + '\'' +
                     ", lastName='" + lastName + '\'' +
                     ", email='" + DataMaskUtil.maskEmail(this.email) + '\'' +
-                    ", phone='" + phone + '\'' +
+                    ", phone='" + DataMaskUtil.maskPhone(this.phone) + '\'' +
                     ", occupation=" + occupation +
                     ", income=" + income +
                     ", address=" + address +
