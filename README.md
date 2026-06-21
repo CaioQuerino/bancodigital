@@ -1,10 +1,22 @@
 # Banco Digital
 
-Aplicação Java com Spring Boot para cadastro e consulta de usuários de um banco digital.
+Portal de entrada da documentação do projeto.
 
-## Visão geral
+## O que você encontra aqui
 
-O projeto expõe endpoints REST para criação e listagem de usuários, com validação de entrada, persistência em banco relacional e hash de senha antes do salvamento.
+- visão geral da aplicação
+- como executar o projeto
+- links para a documentação detalhada por área
+- imagens dos fluxos de usuário, login e conta
+
+## Comece por aqui
+
+- [Documentação detalhada](doc/README.md)
+- [Galeria de imagens](doc/imgs/README.md)
+
+## Resumo rápido
+
+Aplicação Java com Spring Boot para cadastro, autenticação JWT e consulta de usuários e contas de um banco digital.
 
 ## Stack
 
@@ -13,134 +25,31 @@ O projeto expõe endpoints REST para criação e listagem de usuários, com vali
 - Spring Web
 - Spring Data JPA
 - Spring Security
+- JWT
 - Validation
 - PostgreSQL
 - Lombok
 
 ## Como executar
 
-O projeto roda por padrão na porta `8080`.
-
 ```bash
 ./mvnw spring-boot:run
 ```
 
-Se preferir, você também pode executar o projeto pelo botão de run da IDE.
+O projeto roda por padrão na porta 8080.
 
-## Estrutura principal
+## Mapa da documentação
 
-- `controller`: entrada HTTP da aplicação
-- `service`: regras de negócio
-- `dto`: objetos de entrada e saída
-- `entity`: mapeamento das tabelas
-- `repository`: acesso ao banco
-- `config`: configurações da aplicação
-- `enums`: tipos fixos do domínio
-- `util`: utilitários de máscara e apoio
-
-## Endpoint de Usu
-
-### `POST /api/users`
-
-Cria um novo usuários.
-
-Headers:
-
-- `Content-Type: application/json`
-
-Exemplo de corpo:
-
-```json
-{
-  "firstName": "João",
-  "lastName": "Silva",
-  "cpf": "12345678901",
-  "age": 25,
-  "email": "joao.silva@email.com",
-  "password": "123456",
-  "phone": "11999999999",
-  "occupation": "AUTONOMO",
-  "income": 4500.0,
-  "address": {
-    "cep": "01001000",
-    "logradouro": "Praça da Sé",
-    "complemento": "Apto 12",
-    "bairro": "Sé",
-    "localidade": "São Paulo",
-    "uf": "SP"
-  }
-}
-```
-
-Valores aceitos para `occupation`:
-
-- `ESTUDANTE`
-- `AUTONOMO`
-- `MEI`
-- `EMPREGADO`
-- `EMPRESARIO`
-- `SERVIDOR_PUBLICO`
-
-Regras principais:
-
-- `cpf` deve conter 11 dígitos
-- `age` deve ser maior ou igual a 18
-- `email` deve ser válido
-- `password`, `firstName`, `lastName`, `phone`, `occupation`, `income` e `address` são obrigatórios
-
-### `GET /api/users`
-
-Lista os usuários cadastrados.
-
-## Teste rápido
-
-### cURL
-
-```bash
-curl -X POST http://localhost:8080/api/users ^
-  -H "Content-Type: application/json" ^
-  -d "{\"firstName\":\"João\",\"lastName\":\"Silva\",\"cpf\":\"12345678901\",\"age\":25,\"email\":\"joao.silva@email.com\",\"password\":\"123456\",\"phone\":\"11999999999\",\"occupation\":\"AUTONOMO\",\"income\":4500.0,\"address\":{\"cep\":\"01001000\",\"logradouro\":\"Praça da Sé\",\"complemento\":\"Apto 12\",\"bairro\":\"Sé\",\"localidade\":\"São Paulo\",\"uf\":\"SP\"}}"
-```
-
-### Postman
-
-1. Crie uma request `POST` para `http://localhost:8080/api/users`.
-2. Em `Headers`, adicione `Content-Type: application/json`.
-3. Em `Body`, selecione `raw` e depois `JSON`.
-4. Cole o JSON de exemplo.
-5. Clique em `Send`.
-
-## Resposta esperada
-
-Em caso de sucesso, a API responde com `201 Created`.
-
-```json
-{
-  "success": true,
-  "message": "Usuário criado com sucesso",
-  "data": {
-    "firstName": "João",
-    "lastName": "Silva",
-    "cpf": "123.456.789-01",
-    "age": 25,
-    "email": "j***@email.com",
-    "phone": "11999999999",
-    "occupation": "AUTONOMO",
-    "income": 4500.0,
-    "address": {
-      "cep": "01001000",
-      "logradouro": "Praça da Sé",
-      "complemento": "Apto 12",
-      "bairro": "Sé",
-      "localidade": "São Paulo",
-      "uf": "SP"
-    }
-  }
-}
-```
+- [Visão geral da aplicação](doc/README.md#visao-geral)
+- [Segurança JWT](doc/README.md#seguranca)
+- [Usuários](doc/README.md#usuarios)
+- [Login](doc/README.md#login)
+- [Contas](doc/README.md#contas)
+- [Imagens do fluxo](doc/imgs/README.md)
 
 ## Observações
 
 - A senha é armazenada com hash automaticamente.
+- O token JWT expira conforme `JWT_EXPIRATION_MS`.
 - Os dados sensíveis são mascarados nas respostas de saída.
 - O projeto usa PostgreSQL como banco de dados.
