@@ -23,6 +23,7 @@ import br.com.querino.bancodigital.service.AccountService;
 import br.com.querino.bancodigital.util.ApiResponse;
 import br.com.querino.bancodigital.util.BankUtils;
 import br.com.querino.bancodigital.util.Convert;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -32,6 +33,19 @@ public class AccountController {
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
     private final AccountService accountService;
+
+    @PostMapping
+    public ResponseEntity<ApiResponse<AccountrResponseDTO>> createAccount(@Valid @RequestBody CreateAccountDTO dto) {
+        AccountrResponseDTO savedAccount = accountService.createAccount(dto);
+
+        ApiResponse<AccountrResponseDTO> response = ApiResponse.<AccountrResponseDTO>builder()
+            .success(true)
+            .message("Conta criada com sucesso")
+            .data(savedAccount)
+            .build(); 
+
+        return ResponseEntity.status(201).body(response);
+    }
 
     public AccountrResponseDTO createUserAccount(
             CreateUserDTO userDTO,
