@@ -178,6 +178,36 @@ Exemplo de corpo:
 
 Lista as contas cadastradas. Esta rota exige autenticação.
 
+## Transações
+
+### POST /api/transfers
+
+Realiza uma transferência entre contas.
+
+Exemplo de corpo:
+
+```json
+{
+  "sourceAccountNumber": "1234567890",
+  "destinationAccountNumber": "9876543210",
+  "description": "Pagamento de serviço",
+  "transferDate": "2026-06-21T18:30:00",
+  "amount": 150.0
+}
+```
+
+Regras principais:
+
+- sourceAccountNumber deve existir
+- destinationAccountNumber deve existir
+- as contas de origem e destino devem ser diferentes
+- amount deve ser maior que zero
+- a conta de origem deve ter saldo suficiente
+
+### GET /api/transfers
+
+Lista as transferências cadastradas. Esta rota exige autenticação.
+
 ## Respostas
 
 Em caso de sucesso, o cadastro de usuário responde com 201 Created.
