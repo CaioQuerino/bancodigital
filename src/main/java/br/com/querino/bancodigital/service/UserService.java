@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.querino.bancodigital.entity.AddressEntity;
+import br.com.querino.bancodigital.util.Convert;
 import br.com.querino.bancodigital.util.DataMaskUtil;
 import br.com.querino.bancodigital.dto.user.CreateUserDTO;
 import br.com.querino.bancodigital.dto.user.ListUserDTO;
@@ -23,61 +25,51 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public UserResponseDTO createUser(CreateUserDTO dto) {
-        UserEntity entity = convertDtoToEntity(dto);
+        UserEntity entity = Convert.to(dto, UserEntity::new);
         
-        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        if (userRepository.existsByCpf(entity.getCpf())) {
+            throw new IllegalArgumentException("CPF Já cadastrado");
+        }
 
+        if(userRepository.existsByEmail(entity.getEmail())) {
+            throw new IllegalArgumentException("Email Já cadastrado");
+        }
+
+        if(userRepository.existsByPhone(entity.getPhone())) {
+            throw new IllegalArgumentException("Telefone Já cadastrado");
+        }
+
+        if(entity.getUserRole() == null) {
+            entity.setUserRole(UserRole.AUTONOMOUS);
+        }
+
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        
+        AddressEntity address = addressService.convertDtoToEntity(dto.getAddress());
+        if (address != null) {
+            address.setUser(entity);
+        }
+        entity.setAddress(address);
         UserEntity savedEntity = userRepository.save(entity);
 
-        return convertEntityToDto(savedEntity);
+        UserResponseDTO response = Convert.to(savedEntity, UserResponseDTO::new);
+        response.setAddress(addressService.convertEntityToDto(savedEntity.getAddress()));
+        return response;
+
     }
 
     public List<ListUserDTO> listUsers() {
         return userRepository.findAll()
             .stream()
-            .map(this::convertEntityToListUserDto)
+            .map(user -> ListUserDTO.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(DataMaskUtil.maskEmail(user.getEmail()))
+                .phone(DataMaskUtil.maskPhone(user.getPhone()))
+                .occupation(user.getOccupation())
+                .income(user.getIncome())
+                .address(addressService.convertEntityToDto(user.getAddress()))
+                .build())
             .collect(Collectors.toList());
-    }
-
-    private UserEntity convertDtoToEntity(CreateUserDTO dto) {
-        return UserEntity.builder()
-            .firstName(dto.getFirstName())
-            .lastName(dto.getLastName())
-            .userRole(UserRole.AUTONOMOUS)
-            .cpf(dto.getCpf())
-            .age(dto.getAge())
-            .email(dto.getEmail())
-            .password(dto.getPassword())
-            .phone(dto.getPhone())
-            .occupation(dto.getOccupation())
-            .income(dto.getIncome())
-            .address(addressService.convertDtoToEntity(dto.getAddress()))
-            .build();
-    }
-
-    private UserResponseDTO convertEntityToDto(UserEntity entity) {
-        return UserResponseDTO.builder()
-            .firstName(entity.getFirstName())
-            .lastName(entity.getLastName())
-            .cpf(DataMaskUtil.maskCpf(entity.getCpf()))
-            .age(entity.getAge())
-            .email(DataMaskUtil.maskEmail(entity.getEmail()))
-            .phone(entity.getPhone())
-            .occupation(entity.getOccupation())
-            .income(entity.getIncome())
-            .address(addressService.convertEntityToDto(entity.getAddress()))
-            .build();
-    }
-
-    private ListUserDTO convertEntityToListUserDto(UserEntity entity) {
-        return ListUserDTO.builder()
-            .firstName(entity.getFirstName())
-            .lastName(entity.getLastName())
-            .email(DataMaskUtil.maskEmail(entity.getEmail()))
-            .phone(entity.getPhone())
-            .occupation(entity.getOccupation())
-            .income(entity.getIncome())
-            .address(addressService.convertEntityToDto(entity.getAddress()))
-            .build();
     }
 }
