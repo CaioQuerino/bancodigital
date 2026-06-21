@@ -1,4 +1,4 @@
-package br.com.querino.bancodigital.dto;
+package br.com.querino.bancodigital.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
