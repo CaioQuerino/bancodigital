@@ -6,6 +6,7 @@ on:
       - main
       - fluxo-de-conta
       - fluxo-de-autenticacao
+      - fluxo-de-trasacoes
       - fluxo-de-seguranca
   pull_request:
 
