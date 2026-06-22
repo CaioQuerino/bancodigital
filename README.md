@@ -7,7 +7,7 @@ Portal de entrada da documentação do projeto.
 - visão geral da aplicação
 - como executar o projeto
 - links para a documentação detalhada por área
-- imagens dos fluxos de usuário, login e conta
+- imagens dos fluxos de usuário, login, conta e transferência
 
 ## Comece por aqui
 

@@ -80,6 +80,7 @@ Exemplo de corpo:
 
 ```json
 {
+  "userId": "2a44cfef-59cd-4458-9dbd-5b37b4b59706",
   "balance": 1000.0,
   "creditLimit": 500.0,
   "accountType": "CORRENTE"
