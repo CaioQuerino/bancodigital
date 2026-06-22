@@ -30,7 +30,15 @@ public class AccountService {
 
     public AccountrResponseDTO createAccount(CreateAccountDTO dto) {
 
+        if(!userRepository.existsById(dto.getUserId())) {
+            throw new IllegalArgumentException("Usuário não encontrado");
+        }
+
         AccountEntity entity = new AccountEntity();
+
+        entity.setUser(userRepository.findById(dto.getUserId()).orElseThrow (
+            () -> new IllegalArgumentException("Usuário não encontrado")
+        ));
 
         entity.setBalance(dto.getBalance());
         entity.setCreditLimit(dto.getCreditLimit());
