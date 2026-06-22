@@ -7,12 +7,13 @@ Portal de entrada da documentação do projeto.
 - visão geral da aplicação
 - como executar o projeto
 - links para a documentação detalhada por área
-- imagens dos fluxos de usuário, login e conta
+- imagens dos fluxos de usuário, login, conta e transferência
 
 ## Comece por aqui
 
 - [Documentação detalhada](doc/README.md)
 - [Galeria de imagens](doc/imgs/README.md)
+- [Testes sequenciais](doc/tests-sequenciais.md)
 
 ## Resumo rápido
 
@@ -46,6 +47,7 @@ O projeto roda por padrão na porta 8080.
 - [Login](doc/README.md#login)
 - [Contas](doc/README.md#contas)
 - [Imagens do fluxo](doc/imgs/README.md)
+- [Testes sequenciais](doc/tests-sequenciais.md)
 
 ## Observações
 
