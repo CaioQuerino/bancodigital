@@ -1,6 +1,6 @@
 package br.com.querino.bancodigital.dto.account;
 
-import br.com.querino.bancodigital.dto.CreateUserDTO;
+import br.com.querino.bancodigital.dto.user.CreateUserDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

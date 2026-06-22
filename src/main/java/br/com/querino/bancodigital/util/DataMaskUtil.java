@@ -11,4 +11,9 @@ public class DataMaskUtil {
         int atIndex = email.indexOf("@");
         return email.charAt(0) + "******" + email.substring(atIndex - 1);
     }
-} 
+
+    public static String maskPhone(String phone) {
+        if (phone == null || phone.length() < 10) return "**********";
+        return "****" + phone.substring(phone.length() - 4);
+    }
+}
