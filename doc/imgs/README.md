@@ -15,5 +15,6 @@ As imagens abaixo documentam os fluxos principais da aplicação.
 ## Contas
 
 ![Criação de conta com token](account/accountCreatedToken.png)
+![Criação de conta por funcionário do banco](account/accountCreatedEmployeeBank.png)
 ![Listagem de contas com token](account/accountListadToken.png)
 ![Acesso negado sem token](account/accountAccessDenied.png)

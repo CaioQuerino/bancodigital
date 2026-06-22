@@ -5,7 +5,9 @@ public enum UserRole {
     AUTONOMOUS("Autonomous"),
     MEI("Mei"),
     EMPRESARIO("Empresario"),
-    PUBLIC_SERVANT("Public Servant");
+    PUBLIC_SERVANT("Public Servant"),
+    BANK_EMPLOYEE("Bank Employee"),
+    BANK_MANAGER("Bank Manager");
 
 	private final String description;
 

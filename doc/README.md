@@ -24,6 +24,10 @@ Aplicação Java com Spring Boot para cadastro, autenticação JWT e consulta de
 
 O projeto roda por padrão na porta 8080.
 
+## Testes
+
+- [Guia de testes sequenciais](tests-sequenciais.md)
+
 ## Segurança
 
 O projeto usa autenticação JWT.
