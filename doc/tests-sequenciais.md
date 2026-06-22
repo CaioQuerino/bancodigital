@@ -70,6 +70,8 @@ No Postman, selecione `Authorization` e use:
 
 ## 4. Criar conta
 
+Esse passo exige um usuário com papel `BANK_MANAGER` ou `BANK_EMPLOYEE`. A imagem de referência está na [galeria de imagens](imgs/README.md).
+
 Envie uma requisição `POST` para:
 
 ```text
