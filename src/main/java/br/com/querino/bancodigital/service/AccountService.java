@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import br.com.querino.bancodigital.dto.account.AccountrResponseDTO;
+import br.com.querino.bancodigital.dto.account.AccountResponseDTO;
 import br.com.querino.bancodigital.dto.account.CreateAccountDTO;
 import br.com.querino.bancodigital.dto.account.ListAccountDTO;
 import br.com.querino.bancodigital.dto.user.CreateUserDTO;
@@ -28,7 +28,7 @@ public class AccountService {
     private final PasswordEncoder passwordEncoder;
     private final AddressService addressService;
 
-    public AccountrResponseDTO createAccount(CreateAccountDTO dto) {
+    public AccountResponseDTO createAccount(CreateAccountDTO dto) {
 
         if(!userRepository.existsById(dto.getUserId())) {
             throw new IllegalArgumentException("Usuário não encontrado");
@@ -49,10 +49,10 @@ public class AccountService {
 
         AccountEntity savedEntity = accountRepository.save(entity);
 
-        return Convert.to(savedEntity, AccountrResponseDTO::new);
+        return Convert.to(savedEntity, AccountResponseDTO::new);
     }
 
-public AccountrResponseDTO createUserAccount(CreateUserDTO userDTO, CreateAccountDTO accountDTO) {
+public AccountResponseDTO createUserAccount(CreateUserDTO userDTO, CreateAccountDTO accountDTO) {
 
     UserEntity user = Convert.to(userDTO, UserEntity::new);
     user.setUserRole(UserRole.AUTONOMOUS);
@@ -78,7 +78,7 @@ public AccountrResponseDTO createUserAccount(CreateUserDTO userDTO, CreateAccoun
 
     AccountEntity accountSaved = accountRepository.save(account);
 
-    return Convert.to(accountSaved, AccountrResponseDTO::new);
+    return Convert.to(accountSaved, AccountResponseDTO::new);
 }
 
     public List<ListAccountDTO> listAccounts() {
