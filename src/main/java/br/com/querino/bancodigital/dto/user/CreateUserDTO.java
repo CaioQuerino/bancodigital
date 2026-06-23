@@ -3,6 +3,7 @@ package br.com.querino.bancodigital.dto.user;
 import br.com.querino.bancodigital.enums.Occupation;
 import br.com.querino.bancodigital.enums.UserRole;
 import br.com.querino.bancodigital.util.DataMaskUtil;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
@@ -17,41 +18,90 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(
+    name = "CreateUserDTO",
+    description = "Dados necessários para cadastro de um usuário."
+)
 public class CreateUserDTO {
+
+    @Schema(
+        description = "Nome do usuário.",
+        example = "Fernando"
+    )
     @NotNull(message = "Nome é obrigatório")
     private String firstName;
 
+    @Schema(
+        description = "Sobrenome do usuário.",
+        example = "Hernandes"
+    )
     @NotNull(message = "Sobrenome é obrigatório")
     private String lastName;
 
-    @NotNull(message = "CPF é obrigatório")
-    @Pattern(regexp = "\\d{11}", message = "CPF deve conter 11 dígitos numéricos")
+    @Schema(
+        description = "CPF contendo 11 dígitos.",
+        example = "12345678911"
+    )
+    @Pattern(
+        regexp = "\\d{11}",
+        message = "CPF deve conter 11 dígitos numéricos"
+    )
     private String cpf;
 
-    @NotNull(message = "Idade é obrigatória")
+    @Schema(
+        description = "Idade do usuário.",
+        example = "23"
+    )
     @Min(value = 18, message = "O usuário deve ter pelo menos 18 anos")
     private Integer age;
 
-    @NotNull(message = "Email é obrigatório")
+    @Schema(
+        description = "E-mail do usuário.",
+        example = "fernando@email.com"
+    )
     @Email(message = "Email deve ser válido")
     private String email;
 
+    @Schema(
+        description = "Perfil de acesso do usuário.",
+        example = "CLIENT",
+        allowableValues = {
+            "CLIENT",
+            "BANK_EMPLOYEE",
+            "ADMIN"
+        }
+    )
     private UserRole userRole;
 
-    @NotNull(message = "Senha é obrigatória")
+    @Schema(
+        description = "Senha de acesso.",
+        example = "SenhaDificil5321@",
+        format = "password"
+    )
     private String password;
 
-    @NotNull(message = "Telefone é obrigatório")
+    @Schema(
+        description = "Telefone do usuário.",
+        example = "21999998888"
+    )
     private String phone;
 
-    @NotNull(message = "Ocupação é obrigatória")
+    @Schema(
+        description = "Ocupação profissional.",
+        example = "EMPRESARIO"
+    )
     private Occupation occupation;
 
-    @NotNull(message = "Renda é obrigatória")
+    @Schema(
+        description = "Renda mensal declarada.",
+        example = "4500.00"
+    )
     private Double income;
 
     @Valid
-    @NotNull(message = "Endereço é obrigatório")
+    @Schema(
+        description = "Endereço obtido através da integração com ViaCEP."
+    )
     private AddressDTO address;
 
     @Override
