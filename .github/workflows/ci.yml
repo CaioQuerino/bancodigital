@@ -8,6 +8,7 @@ on:
       - fluxo-de-autenticacao
       - fluxo-de-trasacoes
       - fluxo-de-seguranca
+      - fluxo-de-swagger
   pull_request:
 
 jobs:
