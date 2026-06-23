@@ -45,6 +45,7 @@ echo ===========================================
 echo Projeto inicializado!
 echo Spring Boot: http://localhost:8080
 echo pgAdmin:     http://localhost:8081
+echo Swagger:     http://localhost:8080/swagger-ui/index.html
 echo ===========================================
 
 pause
