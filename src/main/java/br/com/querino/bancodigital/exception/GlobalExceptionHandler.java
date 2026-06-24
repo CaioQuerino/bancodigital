@@ -6,14 +6,14 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import br.com.querino.bancodigital.util.ApiResponse;
+import br.com.querino.bancodigital.dto.response.ApiResponseDTO;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ApiResponse<Void>> handleIllegalArgumentException(IllegalArgumentException exception) {
-        ApiResponse<Void> response = ApiResponse.<Void>builder()
+    public ResponseEntity<ApiResponseDTO<Void>> handleIllegalArgumentException(IllegalArgumentException exception) {
+        ApiResponseDTO<Void> response = ApiResponseDTO.<Void>builder()
             .success(false)
             .message(exception.getMessage())
             .build();
@@ -22,13 +22,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse<Void>> handleValidationException(MethodArgumentNotValidException exception) {
+    public ResponseEntity<ApiResponseDTO<Void>> handleValidationException(MethodArgumentNotValidException exception) {
         String message = exception.getBindingResult().getFieldErrors().stream()
             .findFirst()
             .map(fieldError -> fieldError.getDefaultMessage())
             .orElse("Requisição inválida");
 
-        ApiResponse<Void> response = ApiResponse.<Void>builder()
+        ApiResponseDTO<Void> response = ApiResponseDTO.<Void>builder()
             .success(false)
             .message(message)
             .build();
