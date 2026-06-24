@@ -17,6 +17,9 @@ import br.com.querino.bancodigital.repository.UserRepository;
 import br.com.querino.bancodigital.enums.UserRole;
 import lombok.AllArgsConstructor;
 
+/**
+ * Serviço responsável pelas operações relacionadas aos usuários.
+ */
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -24,9 +27,16 @@ public class UserService {
     private AddressService addressService;
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Cria um novo usuário no sistema.
+     *
+     * @param dto dados do usuário
+     * @return usuário criado
+     * @throws IllegalArgumentException quando CPF, e-mail ou telefone já estiverem cadastrados
+     */
     public UserResponseDTO createUser(CreateUserDTO dto) {
         UserEntity entity = Convert.to(dto, UserEntity::new);
-        
+
         if (userRepository.existsByCpf(entity.getCpf())) {
             throw new IllegalArgumentException("CPF Já cadastrado");
         }
@@ -58,6 +68,11 @@ public class UserService {
 
     }
 
+    /**
+     * Lista todos os usuários cadastrados.
+     *
+     * @return lista de usuários
+     */
     public List<ListUserDTO> listUsers() {
         return userRepository.findAll()
             .stream()
