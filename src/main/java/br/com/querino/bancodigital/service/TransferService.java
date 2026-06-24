@@ -17,13 +17,29 @@ import br.com.querino.bancodigital.repository.TransferRepository;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * Serviço responsável pelas transferências entre contas bancárias.
+ */
 @Service
 @AllArgsConstructor
 public class TransferService {
     private final TransferRepository transferRepository;
     private final AccountRepository accountRepository;
 
-    @Transactional
+    /**
+     * Realiza uma transferência entre duas contas.
+     *
+     * @param dto dados da transferência
+     * @return comprovante da transferência realizada
+     * @throws IllegalArgumentException quando:
+     * <ul>
+     *     <li>Conta de origem não existir</li>
+     *     <li>Conta de destino não existir</li>
+     *     <li>As contas forem iguais</li>
+     *     <li>O valor for inválido</li>
+     *     <li>Não houver saldo suficiente</li>
+     * </ul>
+     */
     public TransferResponseDTO createTransfer(TransferDTO dto) {
         AccountEntity sourceAccount = accountRepository.findByAccountNumber(dto.getSourceAccountNumber())
             .orElseThrow(() -> new IllegalArgumentException("Conta de origem não encontrada"));
@@ -68,7 +84,11 @@ public class TransferService {
         );
     }
 
-    @Transactional(readOnly = true)
+    /**
+     * Lista todas as transferências realizadas.
+     *
+     * @return lista de transferências
+     */
     public List<TransferResponseDTO> listTransfers() {
         return transferRepository.findAll()
             .stream()
