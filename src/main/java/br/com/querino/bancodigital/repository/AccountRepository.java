@@ -7,6 +7,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.querino.bancodigital.entity.AccountEntity;
 
-public interface AccountRepository extends JpaRepository<AccountEntity,UUID> {
-	Optional<AccountEntity> findByAccountNumber(String accountNumber);
+/**
+ * Repositório responsável pelas operações de persistência de contas bancárias.
+ */
+public interface AccountRepository extends JpaRepository<AccountEntity, UUID> {
+
+    /**
+     * Busca uma conta pelo número da conta.
+     *
+     * @param accountNumber número da conta
+     * @return conta encontrada, caso exista
+     */
+    Optional<AccountEntity> findByAccountNumber(String accountNumber);
+
 }
