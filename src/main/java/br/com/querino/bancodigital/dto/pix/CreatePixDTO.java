@@ -1,7 +1,5 @@
 package br.com.querino.bancodigital.dto.pix;
 
-import java.util.UUID;
-
 import br.com.querino.bancodigital.enums.KeyType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
