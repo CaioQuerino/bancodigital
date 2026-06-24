@@ -10,6 +10,9 @@ import br.com.querino.bancodigital.entity.UserEntity;
 import br.com.querino.bancodigital.repository.UserRepository;
 import lombok.AllArgsConstructor;
 
+/**
+ * Serviço responsável pela autenticação de usuários.
+ */
 @Service
 @AllArgsConstructor
 public class AuthService {
@@ -17,6 +20,12 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
+    /**
+     * Realiza autenticação do usuário e gera um token JWT.
+     *
+     * @param dto credenciais de acesso
+     * @return token JWT e tipo do token
+     */
     public AuthResponseDTO login(LoginRequestDTO dto) {
         UserEntity user = userRepository.findByEmail(dto.getEmail())
             .orElseThrow(() -> new IllegalArgumentException("Credenciais inválidas"));
