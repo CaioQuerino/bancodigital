@@ -19,6 +19,9 @@ import br.com.querino.bancodigital.enums.UserRole;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import lombok.AllArgsConstructor;
 
+/**
+ * Serviço responsável pelas operações relacionadas às contas bancárias.
+ */
 @Service
 @AllArgsConstructor
 public class AccountService {
@@ -28,6 +31,12 @@ public class AccountService {
     private final PasswordEncoder passwordEncoder;
     private final AddressService addressService;
 
+    /**
+     * Cria uma conta para um usuário já existente.
+     *
+     * @param dto dados da conta
+     * @return conta criada
+     */
     public AccountResponseDTO createAccount(CreateAccountDTO dto) {
 
         if(!userRepository.existsById(dto.getUserId())) {
@@ -52,35 +61,47 @@ public class AccountService {
         return Convert.to(savedEntity, AccountResponseDTO::new);
     }
 
-public AccountResponseDTO createUserAccount(CreateUserDTO userDTO, CreateAccountDTO accountDTO) {
+    /**
+     * Cria um novo usuário juntamente com sua conta bancária.
+     *
+     * @param userDTO dados do usuário
+     * @param accountDTO dados da conta
+     * @return conta criada
+     */
+    public AccountResponseDTO createUserAccount(CreateUserDTO userDTO, CreateAccountDTO accountDTO) {
 
-    UserEntity user = Convert.to(userDTO, UserEntity::new);
-    user.setUserRole(UserRole.AUTONOMOUS);
-    user.setPassword(passwordEncoder.encode(user.getPassword()));
-    
-    if (userDTO.getAddress() != null) {
-        user.setAddress(addressService.convertDtoToEntity(userDTO.getAddress()));
-        user.getAddress().setUser(user);
+        UserEntity user = Convert.to(userDTO, UserEntity::new);
+        user.setUserRole(UserRole.AUTONOMOUS);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        if (userDTO.getAddress() != null) {
+            user.setAddress(addressService.convertDtoToEntity(userDTO.getAddress()));
+            user.getAddress().setUser(user);
+        }
+
+        UserEntity savedUser = userRepository.save(user);
+
+        AccountEntity account = new AccountEntity();
+
+        account.setBalance(accountDTO.getBalance());
+        account.setCreditLimit(accountDTO.getCreditLimit());
+        account.setAccountType(accountDTO.getAccountType());
+
+        account.setAgency(BankUtils.generateAgency());
+        account.setAccountNumber(BankUtils.generateAccountNumber());
+
+        account.setUser(savedUser);
+
+        AccountEntity accountSaved = accountRepository.save(account);
+
+        return Convert.to(accountSaved, AccountResponseDTO::new);
     }
 
-    UserEntity savedUser = userRepository.save(user);
-
-    AccountEntity account = new AccountEntity();
-
-    account.setBalance(accountDTO.getBalance());
-    account.setCreditLimit(accountDTO.getCreditLimit());
-    account.setAccountType(accountDTO.getAccountType());
-
-    account.setAgency(BankUtils.generateAgency());
-    account.setAccountNumber(BankUtils.generateAccountNumber());
-
-    account.setUser(savedUser);
-
-    AccountEntity accountSaved = accountRepository.save(account);
-
-    return Convert.to(accountSaved, AccountResponseDTO::new);
-}
-
+    /**
+     * Lista todas as contas cadastradas.
+     *
+     * @return lista de contas
+     */
     public List<ListAccountDTO> listAccounts() {
         return accountRepository.findAll()
                 .stream()
